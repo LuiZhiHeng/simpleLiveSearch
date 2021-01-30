@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Search</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <table border="1" cellspacing="0">
+        <thead>
+            <tr>
+                <td colspan="2">
+                    <input type="text" id="search">
+                </td>
+            </tr>
+            <br>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody id="result">
+        </tbody>
+    </table>
+    <script>
+        $(document).ready(function() {
+            $('#search').keyup(function(){
+                $.ajax({
+                    type: 'POST',
+                    url: 'search.php',
+                    data: {
+                        name:$('#search').val(),
+                    },
+                    success: function(data) {
+                        $('#result').html(data);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
